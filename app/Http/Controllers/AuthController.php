@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Resources\NotificationsResource;
+use App\Models\Product;
 use Validator;
 use Carbon\Carbon;
 use Vonage\Client;
@@ -29,14 +30,14 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $user = User::create($request->validate());
+        $user = User::create($request->all());
         return $this->returnSuccessMessage('Successfully created user!');
     }
 
     public function login(LoginRequest $request)
     {
         // return  (new UserResource($request))->addcslashes(['gg' => 'bar']);
-        return new UserResource($request);
+            return new UserResource($request);
     }
 
     public function logout(Request $request)
@@ -45,7 +46,7 @@ class AuthController extends Controller
             $request->user()->token()->revoke();
             return $this->returnSuccessMessage('تم تسجيل الخروج بنجاح');
         } elseif (!Auth::check() && !Auth::guard('api-auth')->check()) {
-            return $this->returnError('E001', 'لم يتم تسجيل الدخول');
+            return $this->returnError( 'لم يتم تسجيل الدخول');
         }
     }
 
@@ -105,9 +106,7 @@ class AuthController extends Controller
         }
     }
 
-
 }
-
 
 
 

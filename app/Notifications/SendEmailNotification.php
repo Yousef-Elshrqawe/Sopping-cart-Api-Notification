@@ -62,7 +62,7 @@ class SendEmailNotification extends Notification implements ShouldQueue
             'actiontext' => $this->details['actiontext'],
             'actionurl' => $this->details['actionurl'],
             'endtext' => $this->details['endtext'],
-        ]; 
-      
+        ];
+
     }
 }
